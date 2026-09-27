@@ -1,4 +1,4 @@
-.polysemy-cache
 .stack-work/
 dist-newstyle/
+node_modules/
 *~
