@@ -14,7 +14,7 @@ run :: Maybe TimeSpec -> Eff '[Cache String Int, IOE] a -> IO a
 run ts = runEff . runCache ts
 
 expired :: Maybe TimeSpec
-expired = Just (TimeSpec 0 0)
+expired = Just (TimeSpec (-1) 0)
 
 spec :: Spec
 spec = do
