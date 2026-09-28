@@ -41,6 +41,7 @@ import Effectful.Dispatch.Dynamic (interpret, send)
 import System.Clock (TimeSpec)
 import Prelude hiding (lookup)
 
+-- | @since 0.1.0.0
 data Cache k v :: Effect where
   Insert
     :: Hashable k
@@ -90,6 +91,7 @@ data Cache k v :: Effect where
 
 type instance DispatchOf (Cache k v) = Dynamic
 
+-- | @since 0.1.0.0
 insert
   :: forall k v es
    . Cache k v :> es
@@ -99,6 +101,7 @@ insert
   -> Eff es ()
 insert k v = send (Insert k v :: Cache k v (Eff es) ())
 
+-- | @since 0.1.0.0
 insert'
   :: forall k v es
    . Cache k v :> es
@@ -109,6 +112,7 @@ insert'
   -> Eff es ()
 insert' ts k v = send (Insert' ts k v :: Cache k v (Eff es) ())
 
+-- | @since 0.1.0.0
 lookup
   :: forall k v es
    . Cache k v :> es
@@ -118,6 +122,7 @@ lookup
 lookup k = send (Lookup k :: Cache k v (Eff es) (Maybe v))
 
 -- | Like 'lookup' but never evicts the expired entry it read.
+-- @since 0.1.0.0
 lookup'
   :: forall k v es
    . Cache k v :> es
@@ -126,6 +131,7 @@ lookup'
   -> Eff es (Maybe v)
 lookup' k = send (Lookup' k :: Cache k v (Eff es) (Maybe v))
 
+-- | @since 0.1.0.0
 keys
   :: forall k v es
    . Cache k v :> es
@@ -133,6 +139,7 @@ keys
   => Eff es [k]
 keys = send (Keys :: Cache k v (Eff es) [k])
 
+-- | @since 0.1.0.0
 delete
   :: forall k v es
    . Cache k v :> es
@@ -141,6 +148,7 @@ delete
   -> Eff es ()
 delete k = send (Delete k :: Cache k v (Eff es) ())
 
+-- | @since 0.1.0.0
 filterWithKey
   :: forall k v es
    . Cache k v :> es
@@ -149,6 +157,7 @@ filterWithKey
   -> Eff es ()
 filterWithKey p = send (FilterWithKey p :: Cache k v (Eff es) ())
 
+-- | @since 0.1.0.0
 purge
   :: forall k v es
    . Cache k v :> es
@@ -156,6 +165,7 @@ purge
   => Eff es ()
 purge = send (Purge :: Cache k v (Eff es) ())
 
+-- | @since 0.1.0.0
 purgeExpired
   :: forall k v es
    . Cache k v :> es
@@ -163,6 +173,7 @@ purgeExpired
   => Eff es ()
 purgeExpired = send (PurgeExpired :: Cache k v (Eff es) ())
 
+-- | @since 0.1.0.0
 size
   :: forall k v es
    . Cache k v :> es
@@ -170,6 +181,7 @@ size
   => Eff es Int
 size = send (Size :: Cache k v (Eff es) Int)
 
+-- | @since 0.1.0.0
 defaultExpiration
   :: forall k v es
    . Cache k v :> es
@@ -177,6 +189,7 @@ defaultExpiration
   => Eff es (Maybe TimeSpec)
 defaultExpiration = send (DefaultExpiration :: Cache k v (Eff es) (Maybe TimeSpec))
 
+-- | @since 0.1.0.0
 setDefaultExpiration
   :: forall k v es
    . Cache k v :> es
@@ -186,6 +199,7 @@ setDefaultExpiration
 setDefaultExpiration ts = send (SetDefaultExpiration ts :: Cache k v (Eff es) ())
 
 -- | Run against a fresh store with the given default expiration.
+-- @since 0.1.0.0
 runCache
   :: forall k v es a
    . IOE :> es
@@ -197,6 +211,7 @@ runCache ts eff = do
   runCacheWith c eff
 
 -- | Run against an existing 'C.Cache', e.g. one shared with non-effectful code.
+-- @since 0.1.0.0
 runCacheWith
   :: forall k v es a
    . IOE :> es
