@@ -22,6 +22,8 @@ dependencies:
   - clock >= 0.8 && < 0.9
   - effectful-core >= 2.3 && < 3
   - hashable
+  - hs-opentelemetry-api >= 0.3 && < 0.4
+  - text
 
 ghc-options:
   - -Wall
@@ -50,5 +52,10 @@ tests:
       - effectful-data-cache
       - hspec
       - effectful-core
+      - hs-opentelemetry-api
+      - hs-opentelemetry-sdk
+      - hs-opentelemetry-exporter-in-memory
+      - text
+      - unordered-containers
     build-tools:
       - hspec-discover
