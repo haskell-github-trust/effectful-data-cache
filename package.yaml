@@ -1,3 +1,4 @@
+---
 name: effectful-data-cache
 version: 0.1.0.1
 github: haskell-github-trust/effectful-data-cache
@@ -8,6 +9,8 @@ copyright: 2026 drlkf
 
 extra-source-files:
   - README.md
+
+extra-docs-files:
   - CHANGELOG.md
 
 category: cache
