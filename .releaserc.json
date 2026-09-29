@@ -10,14 +10,6 @@
         "preset": "conventionalcommits",
         "releaseRules": [
           {
-            "breaking": true,
-            "release": "minor"
-          },
-          {
-            "type": "feat",
-            "release": "patch"
-          },
-          {
             "type": "docs",
             "release": "patch"
           },
