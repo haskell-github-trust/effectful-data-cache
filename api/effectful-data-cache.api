@@ -1,4 +1,5 @@
 Effectful.Cache.Cache
+Effectful.Cache.OpenTelemetry.traceCache
 Effectful.Cache.defaultExpiration
 Effectful.Cache.delete
 Effectful.Cache.filterWithKey

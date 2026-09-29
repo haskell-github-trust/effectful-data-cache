@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/haskell-github-trust/effectful-data-cache/compare/1.0.0...1.0.1) (2026-09-28)
+
+### Features
+
+* add otel telemetry ([9c0cdf2](https://github.com/haskell-github-trust/effectful-data-cache/commit/9c0cdf2a8e001644bde24cdcd0524243ee1651f7))
+
 ## 1.0.0 (2026-09-28)
 
 ### Features

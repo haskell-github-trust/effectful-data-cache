@@ -29,6 +29,7 @@ import OpenTelemetry.Trace.Core (
 
 -- | Wrap every cache operation in a span. Keys and values are never recorded:
 -- unbounded cardinality, and likely user data.
+-- @since 0.1.0.1
 traceCache
   :: forall k v es a
    . Cache k v :> es
