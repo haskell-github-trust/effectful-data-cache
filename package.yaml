@@ -1,6 +1,6 @@
 ---
 name: effectful-data-cache
-version: 0.1.0.2
+version: 0.1.0.3
 github: haskell-github-trust/effectful-data-cache
 license: BSD-3-Clause
 author: drlkf
