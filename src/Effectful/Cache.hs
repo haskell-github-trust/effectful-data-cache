@@ -199,6 +199,7 @@ setDefaultExpiration
 setDefaultExpiration ts = send (SetDefaultExpiration ts :: Cache k v (Eff es) ())
 
 -- | Run against a fresh store with the given default expiration.
+--
 -- @since 0.1.0.0
 runCache
   :: forall k v es a
@@ -211,6 +212,7 @@ runCache ts eff = do
   runCacheWith c eff
 
 -- | Run against an existing 'C.Cache', e.g. one shared with non-effectful code.
+--
 -- @since 0.1.0.0
 runCacheWith
   :: forall k v es a
