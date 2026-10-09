@@ -2,3 +2,4 @@
 snapshot: lts-24.59
 packages:
   - .
+  - effectful-data-cache-opentelemetry

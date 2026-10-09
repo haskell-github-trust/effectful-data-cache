@@ -36,7 +36,27 @@
       }
     ],
     "@semantic-release/changelog",
-    "semantic-release-haddock-since",
+    [
+      "semantic-release-haddock-since",
+      {
+        "haddockCommand": ["stack", "haddock", "--no-haddock-deps", "effectful-data-cache"],
+        "buildCommand": ["stack", "build", "effectful-data-cache"]
+      }
+    ],
+    [
+      "semantic-release-haddock-since",
+      {
+        "versionFiles": [
+          "effectful-data-cache-opentelemetry/package.yaml",
+          "effectful-data-cache-opentelemetry/*.cabal"
+        ],
+        "baseline": "effectful-data-cache-opentelemetry/api/effectful-data-cache-opentelemetry.api",
+        "srcDir": "effectful-data-cache-opentelemetry/src",
+        "haddockCommand": ["stack", "haddock", "--no-haddock-deps", "effectful-data-cache-opentelemetry"],
+        "buildCommand": ["stack", "build", "effectful-data-cache-opentelemetry"],
+        "haddockOutputDir": "effectful-data-cache-opentelemetry/.stack-work"
+      }
+    ],
     [
       "@semantic-release/git",
       {
@@ -45,7 +65,11 @@
           "*.cabal",
           "src/**/*.hs",
           "api/*.api",
-          "CHANGELOG.md"
+          "CHANGELOG.md",
+          "effectful-data-cache-opentelemetry/package.yaml",
+          "effectful-data-cache-opentelemetry/*.cabal",
+          "effectful-data-cache-opentelemetry/src/**/*.hs",
+          "effectful-data-cache-opentelemetry/api/*.api"
         ]
       }
     ],
