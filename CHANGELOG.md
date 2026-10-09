@@ -1,3 +1,13 @@
+## [2.0.0](https://github.com/haskell-github-trust/effectful-data-cache/compare/1.0.4...2.0.0) (2026-10-09)
+
+### ⚠ BREAKING CHANGES
+
+* split into base & otel packages
+
+### Code Refactoring
+
+* split into base & otel packages ([782b664](https://github.com/haskell-github-trust/effectful-data-cache/commit/782b664762aa56f2c9515ec3cff7cc4d612dd630))
+
 ## [1.0.4](https://github.com/haskell-github-trust/effectful-data-cache/compare/1.0.3...1.0.4) (2026-10-02)
 
 ## [1.0.3](https://github.com/haskell-github-trust/effectful-data-cache/compare/1.0.2...1.0.3) (2026-10-01)
