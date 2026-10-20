@@ -40,7 +40,7 @@ attr
   :: ImmutableSpan
   -> Text
   -> Maybe Attribute
-attr s k = lookupAttribute (spanAttributes s) k
+attr s = lookupAttribute (spanAttributes s)
 
 spec :: Spec
 spec = do
@@ -49,7 +49,7 @@ spec = do
       insert @String @Int "a" (1 :: Int)
       _ <- lookup @String @Int "a"
       purge @String @Int
-    map spanName spans `shouldBe` ["cache.insert", "cache.lookup", "cache.purge"]
+    fmap spanName spans `shouldBe` ["cache.insert", "cache.lookup", "cache.purge"]
 
   it "records hits and misses" $ do
     (_, spans) <- traced $ do
