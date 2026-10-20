@@ -14,6 +14,31 @@ jobs:
 
       - id: matrix
         uses: freckle/stack-action/generate-matrix@v5
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: haskell-actions/hlint-setup@v2
+        with:
+          version: "3.10"
+
+      - uses: haskell-actions/hlint-run@v2
+        with:
+          path: '["src/", "test/", "effectful-data-cache-opentelemetry/src/", "effectful-data-cache-opentelemetry/test/"]'
+          fail-on: warning
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: haskell-actions/run-fourmolu@v13
+        with:
+          version: "0.21.0.0"
+          pattern: |
+            src/**/*.hs
+            test/**/*.hs
+            effectful-data-cache-opentelemetry/src/**/*.hs
+            effectful-data-cache-opentelemetry/test/**/*.hs
 
   build:
     needs: generate-matrix
@@ -21,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-15]
         stack-yaml: ${{ fromJSON(needs.generate-matrix.outputs.stack-yamls) }}
     steps:
       - uses: actions/checkout@v6
