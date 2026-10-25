@@ -25,6 +25,7 @@ jobs:
       - uses: freckle/stack-action@v5
         with:
           test: false
+          cache-prefix: v2/
 
       - uses: actions/setup-node@v4
         with:

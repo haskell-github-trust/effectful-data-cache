@@ -7,6 +7,12 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 
+-- | Dynamic effect over "Data.Cache", an in-memory key/value store with
+-- optional per-item expiration.
+--
+-- > runEff . runCache @Text @Int Nothing $ do
+-- >   insert "a" 1
+-- >   lookup @Text @Int "a"
 module Effectful.Cache (
   Cache (..),
   insert,
@@ -41,49 +47,63 @@ import Effectful.Dispatch.Dynamic (interpret, send)
 import System.Clock (TimeSpec)
 import Prelude hiding (lookup)
 
--- | @since 0.1.0.0
+-- | Cache of values @v@ indexed by keys @k@.
+--
+-- @since 0.1.0.0
 data Cache k v :: Effect where
+  -- | See 'insert'.
   Insert
     :: Hashable k
     => k
     -> v
     -> Cache k v m ()
+  -- | See 'insert''.
   Insert'
     :: Hashable k
     => Maybe TimeSpec
     -> k
     -> v
     -> Cache k v m ()
+  -- | See 'lookup'.
   Lookup
     :: Hashable k
     => k
     -> Cache k v m (Maybe v)
+  -- | See 'lookup''.
   Lookup'
     :: Hashable k
     => k
     -> Cache k v m (Maybe v)
+  -- | See 'keys'.
   Keys
     :: Hashable k => Cache k v m [k]
+  -- | See 'delete'.
   Delete
     :: Hashable k
     => k
     -> Cache k v m ()
+  -- | See 'filterWithKey'.
   FilterWithKey
     :: Hashable k
     => (k -> v -> Bool)
     -> Cache k v m ()
+  -- | See 'purge'.
   Purge
     :: Hashable k
     => Cache k v m ()
+  -- | See 'purgeExpired'.
   PurgeExpired
     :: Hashable k
     => Cache k v m ()
+  -- | See 'size'.
   Size
     :: Hashable k
     => Cache k v m Int
+  -- | See 'defaultExpiration'.
   DefaultExpiration
     :: Hashable k
     => Cache k v m (Maybe TimeSpec)
+  -- | See 'setDefaultExpiration'.
   SetDefaultExpiration
     :: Hashable k
     => Maybe TimeSpec
@@ -91,7 +111,9 @@ data Cache k v :: Effect where
 
 type instance DispatchOf (Cache k v) = Dynamic
 
--- | @since 0.1.0.0
+-- | Insert an item with the cache's default expiration.
+--
+-- @since 0.1.0.0
 insert
   :: forall k v es
    . Cache k v :> es
@@ -101,7 +123,10 @@ insert
   -> Eff es ()
 insert k v = send (Insert k v :: Cache k v (Eff es) ())
 
--- | @since 0.1.0.0
+-- | Insert an item with an explicit expiration, relative to now;
+-- 'Nothing' never expires. The default expiration is ignored.
+--
+-- @since 0.1.0.0
 insert'
   :: forall k v es
    . Cache k v :> es
@@ -112,7 +137,9 @@ insert'
   -> Eff es ()
 insert' ts k v = send (Insert' ts k v :: Cache k v (Eff es) ())
 
--- | @since 0.1.0.0
+-- | Look up a non-expired item, evicting it if expired.
+--
+-- @since 0.1.0.0
 lookup
   :: forall k v es
    . Cache k v :> es
@@ -122,6 +149,7 @@ lookup
 lookup k = send (Lookup k :: Cache k v (Eff es) (Maybe v))
 
 -- | Like 'lookup' but never evicts the expired entry it read.
+--
 -- @since 0.1.0.0
 lookup'
   :: forall k v es
@@ -131,7 +159,9 @@ lookup'
   -> Eff es (Maybe v)
 lookup' k = send (Lookup' k :: Cache k v (Eff es) (Maybe v))
 
--- | @since 0.1.0.0
+-- | All keys in the store, including expired ones.
+--
+-- @since 0.1.0.0
 keys
   :: forall k v es
    . Cache k v :> es
@@ -139,7 +169,9 @@ keys
   => Eff es [k]
 keys = send (Keys :: Cache k v (Eff es) [k])
 
--- | @since 0.1.0.0
+-- | Delete an item; no-op if absent.
+--
+-- @since 0.1.0.0
 delete
   :: forall k v es
    . Cache k v :> es
@@ -148,7 +180,10 @@ delete
   -> Eff es ()
 delete k = send (Delete k :: Cache k v (Eff es) ())
 
--- | @since 0.1.0.0
+-- | Keep only items satisfying the predicate, which may be called
+-- on expired items.
+--
+-- @since 0.1.0.0
 filterWithKey
   :: forall k v es
    . Cache k v :> es
@@ -157,7 +192,9 @@ filterWithKey
   -> Eff es ()
 filterWithKey p = send (FilterWithKey p :: Cache k v (Eff es) ())
 
--- | @since 0.1.0.0
+-- | Delete all items.
+--
+-- @since 0.1.0.0
 purge
   :: forall k v es
    . Cache k v :> es
@@ -165,7 +202,9 @@ purge
   => Eff es ()
 purge = send (Purge :: Cache k v (Eff es) ())
 
--- | @since 0.1.0.0
+-- | Delete all expired items, atomically.
+--
+-- @since 0.1.0.0
 purgeExpired
   :: forall k v es
    . Cache k v :> es
@@ -173,7 +212,9 @@ purgeExpired
   => Eff es ()
 purgeExpired = send (PurgeExpired :: Cache k v (Eff es) ())
 
--- | @since 0.1.0.0
+-- | Number of items, including expired ones.
+--
+-- @since 0.1.0.0
 size
   :: forall k v es
    . Cache k v :> es
@@ -181,7 +222,9 @@ size
   => Eff es Int
 size = send (Size :: Cache k v (Eff es) Int)
 
--- | @since 0.1.0.0
+-- | Expiration applied by 'insert'.
+--
+-- @since 0.1.0.0
 defaultExpiration
   :: forall k v es
    . Cache k v :> es
@@ -189,7 +232,9 @@ defaultExpiration
   => Eff es (Maybe TimeSpec)
 defaultExpiration = send (DefaultExpiration :: Cache k v (Eff es) (Maybe TimeSpec))
 
--- | @since 0.1.0.0
+-- | Change the expiration applied by subsequent 'insert's.
+--
+-- @since 0.1.0.0
 setDefaultExpiration
   :: forall k v es
    . Cache k v :> es
