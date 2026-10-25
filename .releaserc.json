@@ -58,6 +58,20 @@
       }
     ],
     [
+      "semantic-release-haddock-since",
+      {
+        "versionFiles": [
+          "effectful-data-cache-memcache/package.yaml",
+          "effectful-data-cache-memcache/*.cabal"
+        ],
+        "baseline": "effectful-data-cache-memcache/api/effectful-data-cache-memcache.api",
+        "srcDir": "effectful-data-cache-memcache/src",
+        "haddockCommand": ["stack", "haddock", "--no-haddock-deps", "effectful-data-cache-memcache"],
+        "buildCommand": ["stack", "build", "effectful-data-cache-memcache"],
+        "haddockOutputDir": "effectful-data-cache-memcache/.stack-work"
+      }
+    ],
+    [
       "@semantic-release/git",
       {
         "assets": [
@@ -69,7 +83,11 @@
           "effectful-data-cache-opentelemetry/package.yaml",
           "effectful-data-cache-opentelemetry/*.cabal",
           "effectful-data-cache-opentelemetry/src/**/*.hs",
-          "effectful-data-cache-opentelemetry/api/*.api"
+          "effectful-data-cache-opentelemetry/api/*.api",
+          "effectful-data-cache-memcache/package.yaml",
+          "effectful-data-cache-memcache/*.cabal",
+          "effectful-data-cache-memcache/src/**/*.hs",
+          "effectful-data-cache-memcache/api/*.api"
         ]
       }
     ],

@@ -1,0 +1,62 @@
+---
+name: effectful-data-cache-memcache
+version: 0.1.0.0
+github: haskell-github-trust/effectful-data-cache
+license: BSD-3-Clause
+author: drlkf
+maintainer: drlkf <drlkf@drlkf.net>
+copyright: 2026 drlkf
+
+extra-source-files:
+  - README.md
+
+extra-doc-files:
+  - CHANGELOG.md
+
+category: cache
+synopsis: memcached backend for effectful-data-cache
+description: >-
+  Please see the README on GitHub at
+  <https://github.com/haskell-github-trust/effectful-data-cache/tree/main/effectful-data-cache-memcache#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - bytestring >= 0.11 && < 0.13
+  - clock >= 0.8 && < 0.9
+  - effectful-core >= 2.3 && < 3
+  - effectful-data-cache >= 0.2 && < 0.3
+  - memcache >= 0.3 && < 0.4
+
+ghc-options:
+  - -Wall
+  - -Wextra
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+
+library:
+  source-dirs: src
+
+tests:
+  effectful-data-cache-memcache-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - effectful-data-cache-memcache
+      - effectful-data-cache
+      - effectful-core
+      - bytestring
+      - clock
+      - hspec
+      - memcache
+    build-tools:
+      - hspec-discover

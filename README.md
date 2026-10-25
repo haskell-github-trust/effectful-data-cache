@@ -19,3 +19,8 @@ main = runEff . runCache Nothing $ do
 
 See [effectful-data-cache-opentelemetry](effectful-data-cache-opentelemetry)
 for OpenTelemetry instrumentation.
+
+## memcached
+
+See [effectful-data-cache-memcache](effectful-data-cache-memcache) for a
+memcached backend.
