@@ -1,3 +1,9 @@
+## [2.0.2](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.0.1...2.0.2) (2026-10-25)
+
+### Bug Fixes
+
+* update opentelemetry sdk to 1 ([e770527](https://github.com/haskell-github-trust/effectful-data-cache/commit/e77052759667bd51f32da4ef64d9330892065112))
+
 ## [2.0.1](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.0.0...2.0.1) (2026-10-25)
 
 ## [2.0.0](https://github.com/haskell-github-trust/effectful-data-cache/compare/1.0.4...2.0.0) (2026-10-09)
