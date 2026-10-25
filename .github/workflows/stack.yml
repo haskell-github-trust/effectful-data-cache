@@ -24,7 +24,7 @@ jobs:
 
       - uses: haskell-actions/hlint-run@v2
         with:
-          path: '["src/", "test/", "effectful-data-cache-opentelemetry/src/", "effectful-data-cache-opentelemetry/test/"]'
+          path: '["src/", "test/", "effectful-data-cache-opentelemetry/src/", "effectful-data-cache-opentelemetry/test/", "effectful-data-cache-memcache/src/", "effectful-data-cache-memcache/test/"]'
           fail-on: warning
 
   format:
@@ -39,6 +39,8 @@ jobs:
             test/**/*.hs
             effectful-data-cache-opentelemetry/src/**/*.hs
             effectful-data-cache-opentelemetry/test/**/*.hs
+            effectful-data-cache-memcache/src/**/*.hs
+            effectful-data-cache-memcache/test/**/*.hs
 
   build:
     needs: generate-matrix
@@ -50,6 +52,10 @@ jobs:
         stack-yaml: ${{ fromJSON(needs.generate-matrix.outputs.stack-yamls) }}
     steps:
       - uses: actions/checkout@v6
+
+      # macOS runners have no service containers; memcache tests skip there
+      - if: runner.os == 'Linux'
+        run: docker run -d -p 11211:11211 memcached:1.6
 
       - uses: freckle/stack-action@v5
         with:

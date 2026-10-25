@@ -3,6 +3,7 @@ snapshot: lts-24.59
 packages:
   - .
   - effectful-data-cache-opentelemetry
+  - effectful-data-cache-memcache
 extra-deps:
   - hs-opentelemetry-api-1.0.0.0
   - hs-opentelemetry-api-types-1.0.0.0
