@@ -3,3 +3,18 @@ snapshot: lts-24.59
 packages:
   - .
   - effectful-data-cache-opentelemetry
+extra-deps:
+  - hs-opentelemetry-api-1.0.0.0
+  - hs-opentelemetry-api-types-1.0.0.0
+  - hs-opentelemetry-semantic-conventions-1.40.0.0
+  - hs-opentelemetry-otlp-1.0.0.0
+  - hs-opentelemetry-sdk-1.0.0.0
+  - hs-opentelemetry-exporter-in-memory-1.0.0.0
+  - hs-opentelemetry-exporter-handle-1.0.0.0
+  - hs-opentelemetry-exporter-otlp-1.0.0.0
+  - hs-opentelemetry-propagator-b3-1.0.0.0
+  - hs-opentelemetry-propagator-datadog-1.0.0.0
+  - hs-opentelemetry-propagator-jaeger-1.0.0.0
+  - hs-opentelemetry-propagator-w3c-1.0.0.0
+  - hs-opentelemetry-propagator-xray-1.0.0.0
+  - thread-utils-context-0.4.1.1
