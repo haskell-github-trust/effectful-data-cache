@@ -19,6 +19,7 @@ import OpenTelemetry.Trace (
   shutdownTracerProvider,
   tracerOptions,
  )
+import OpenTelemetry.Trace.Core (SpanHot (..))
 import Test.Hspec
 import Prelude hiding (lookup)
 
@@ -26,21 +27,21 @@ import Prelude hiding (lookup)
 -- result plus every span that was exported.
 traced
   :: Eff '[Cache String Int, IOE] a
-  -> IO (a, [ImmutableSpan])
+  -> IO (a, [SpanHot])
 traced prog = do
   (processor, ref) <- inMemoryListExporter
   provider <- createTracerProvider [processor] emptyTracerProviderOptions
   let tracer = makeTracer provider "effectful-data-cache-test" tracerOptions
   r <- runEff . runCache @String @Int Nothing $ traceCache @String @Int tracer prog
-  shutdownTracerProvider provider
-  spans <- readIORef ref
-  pure (r, reverse spans)
+  _ <- shutdownTracerProvider provider Nothing
+  spans <- traverse (readIORef . spanHot) . reverse =<< readIORef ref
+  pure (r, spans)
 
 attr
-  :: ImmutableSpan
+  :: SpanHot
   -> Text
   -> Maybe Attribute
-attr s = lookupAttribute (spanAttributes s)
+attr s = lookupAttribute (hotAttributes s)
 
 spec :: Spec
 spec = do
@@ -49,7 +50,7 @@ spec = do
       insert @String @Int "a" (1 :: Int)
       _ <- lookup @String @Int "a"
       purge @String @Int
-    fmap spanName spans `shouldBe` ["cache.insert", "cache.lookup", "cache.purge"]
+    fmap hotName spans `shouldBe` ["cache.insert", "cache.lookup", "cache.purge"]
 
   it "records hits and misses" $ do
     (_, spans) <- traced $ do
@@ -57,7 +58,7 @@ spec = do
       _ <- lookup @String @Int "a"
       _ <- lookup @String @Int "nope"
       pure ()
-    let hits = [attr s "cache.hit" | s <- spans, spanName s == "cache.lookup"]
+    let hits = [attr s "cache.hit" | s <- spans, hotName s == "cache.lookup"]
     hits
       `shouldBe` [ Just (AttributeValue (BoolAttribute True))
                  , Just (AttributeValue (BoolAttribute False))
@@ -69,7 +70,7 @@ spec = do
       insert @String @Int "b" (2 :: Int)
       _ <- size @String @Int
       pure ()
-    [attr s "cache.size" | s <- spans, spanName s == "cache.size"]
+    [attr s "cache.size" | s <- spans, hotName s == "cache.size"]
       `shouldBe` [Just (AttributeValue (IntAttribute 2))]
 
   it "still returns the underlying result" $ do
