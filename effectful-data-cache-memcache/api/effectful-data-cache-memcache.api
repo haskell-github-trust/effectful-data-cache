@@ -1,3 +1,5 @@
 Effectful.Cache.Memcache.Codec
+Effectful.Cache.Memcache.GHC.Internal.Exception.Type.Exception Effectful.Cache.Memcache.MemcacheUnsupported
+Effectful.Cache.Memcache.GHC.Internal.Show.Show Effectful.Cache.Memcache.MemcacheUnsupported
 Effectful.Cache.Memcache.MemcacheUnsupported
 Effectful.Cache.Memcache.runCacheMemcache

@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.0.2...2.1.0) (2026-10-26)
+
+### Features
+
+* add memcache backend ([ea47208](https://github.com/haskell-github-trust/effectful-data-cache/commit/ea47208f2e74ed0820e28d1786d2abcf4f4192b3))
+
 ## [2.0.2](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.0.1...2.0.2) (2026-10-25)
 
 ### Bug Fixes
