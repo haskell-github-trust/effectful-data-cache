@@ -1,3 +1,9 @@
+## [2.2.0](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.1.0...2.2.0) (2026-10-27)
+
+### Features
+
+* add stm-based interpreter ([5b76933](https://github.com/haskell-github-trust/effectful-data-cache/commit/5b7693322b1fef87f9753aaf24e527764bf688a2))
+
 ## [2.1.0](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.0.2...2.1.0) (2026-10-26)
 
 ### Features

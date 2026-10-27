@@ -28,13 +28,19 @@ import Effectful.Dispatch.Dynamic (interpret)
 import System.Clock (Clock (Monotonic), TimeSpec, getTime)
 
 -- | Entries with their absolute expiration, and the default expiration.
+--
+-- @since 0.2.2.0
 data Store k v = Store (TVar (HM.HashMap k (v, Maybe TimeSpec))) (TVar (Maybe TimeSpec))
 
 -- | Fresh store with the given default expiration.
+--
+-- @since 0.2.2.0
 newStore :: Maybe TimeSpec -> IO (Store k v)
 newStore ts = Store <$> newTVarIO HM.empty <*> newTVarIO ts
 
 -- | Run against a fresh store with the given default expiration.
+--
+-- @since 0.2.2.0
 runCacheSTM
   :: forall k v es a
    . IOE :> es
@@ -46,6 +52,8 @@ runCacheSTM ts eff = do
   runCacheSTMWith s eff
 
 -- | Run against an existing 'Store', e.g. one shared between threads.
+--
+-- @since 0.2.2.0
 runCacheSTMWith
   :: forall k v es a
    . IOE :> es

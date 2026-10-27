@@ -1,6 +1,6 @@
 ---
 name: effectful-data-cache-opentelemetry
-version: 0.2.1.0
+version: 0.2.2.0
 github: haskell-github-trust/effectful-data-cache
 license: BSD-3-Clause
 author: drlkf

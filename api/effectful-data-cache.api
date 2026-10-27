@@ -1,4 +1,8 @@
 Effectful.Cache.Cache
+Effectful.Cache.STM.Store
+Effectful.Cache.STM.newStore
+Effectful.Cache.STM.runCacheSTM
+Effectful.Cache.STM.runCacheSTMWith
 Effectful.Cache.defaultExpiration
 Effectful.Cache.delete
 Effectful.Cache.filterWithKey
