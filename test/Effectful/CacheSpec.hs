@@ -1,7 +1,8 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TypeApplications #-}
 
-module Effectful.CacheSpec (spec) where
+module Effectful.CacheSpec (spec, specWith) where
 
 import Data.List (sort)
 import Effectful
@@ -10,14 +11,16 @@ import System.Clock (TimeSpec (..))
 import Test.Hspec
 import Prelude hiding (lookup)
 
-run :: Maybe TimeSpec -> Eff '[Cache String Int, IOE] a -> IO a
-run ts = runEff . runCache ts
+type Runner = forall a. Maybe TimeSpec -> Eff '[Cache String Int, IOE] a -> IO a
 
 expired :: Maybe TimeSpec
 expired = Just (TimeSpec (-1) 0)
 
 spec :: Spec
-spec = do
+spec = specWith (\ts -> runEff . runCache ts)
+
+specWith :: Runner -> Spec
+specWith run = do
   it "looks up what it inserted" $ do
     r <- run Nothing $ do
       insert "a" (1 :: Int)

@@ -29,6 +29,7 @@ source-repository head
 library
   exposed-modules:
       Effectful.Cache
+      Effectful.Cache.STM
   other-modules:
       Paths_effectful_data_cache
   autogen-modules:
@@ -42,12 +43,15 @@ library
     , clock ==0.8.*
     , effectful-core >=2.3 && <3
     , hashable >=1.5 && <2
+    , stm >=2.5 && <3
+    , unordered-containers ==0.2.*
   default-language: Haskell2010
 
 test-suite effectful-data-cache-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Effectful.Cache.STMSpec
       Effectful.CacheSpec
       Paths_effectful_data_cache
   autogen-modules:
@@ -65,4 +69,6 @@ test-suite effectful-data-cache-test
     , effectful-data-cache
     , hashable >=1.5 && <2
     , hspec
+    , stm >=2.5 && <3
+    , unordered-containers ==0.2.*
   default-language: Haskell2010
