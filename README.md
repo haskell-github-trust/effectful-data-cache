@@ -24,3 +24,21 @@ for OpenTelemetry instrumentation.
 
 See [effectful-data-cache-memcache](effectful-data-cache-memcache) for a
 memcached backend.
+
+## Development
+
+Requires [just](https://github.com/casey/just), stack, fourmolu 0.21.0.0 and hlint.
+
+```sh
+just build   # build and test; memcache tests need: docker run -d -p 11211:11211 memcached:1.6
+just fmt     # format with fourmolu
+just lint    # lint with hlint
+just docs    # build Haddock tarballs
+```
+
+Releasing needs `HACKAGE_KEY` set:
+
+```sh
+just candidate [pkgs...]  # upload Hackage candidates
+just release [pkgs...]    # publish to Hackage
+```
