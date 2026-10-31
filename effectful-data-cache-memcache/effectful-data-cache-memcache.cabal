@@ -5,7 +5,7 @@ cabal-version: 2.2
 -- see: https://github.com/sol/hpack
 
 name:           effectful-data-cache-memcache
-version:        0.2.2.0
+version:        0.2.2.1
 synopsis:       memcached backend for effectful-data-cache
 description:    Please see the README on GitHub at <https://github.com/haskell-github-trust/effectful-data-cache/tree/main/effectful-data-cache-memcache#readme>
 category:       cache

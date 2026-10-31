@@ -1,3 +1,5 @@
+## [2.2.1](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.2.0...2.2.1) (2026-10-31)
+
 ## [2.2.0](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.1.0...2.2.0) (2026-10-27)
 
 ### Features
