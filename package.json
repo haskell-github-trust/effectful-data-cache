@@ -8,6 +8,6 @@
     "@semantic-release/git": "^11.0.0",
     "conventional-changelog-conventionalcommits": "^9.0.0",
     "semantic-release": "^25.0.9",
-    "semantic-release-haddock-since": "github:haskell-github-trust/semantic-release-haddock-since#1.0.0"
+    "semantic-release-haddock-since": "https://github.com/haskell-github-trust/semantic-release-haddock-since/releases/download/1.0.1/semantic-release-haddock-since-1.0.1.tgz"
   }
 }
