@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.2.1...2.2.2) (2026-11-16)
+
+### Bug Fixes
+
+* **memcache:** switch to stackage nightly ([5d9b8b4](https://github.com/haskell-github-trust/effectful-data-cache/commit/5d9b8b4657cf49fed916922865f684f6b8485b27))
+* remove unnecessary extra-deps ([650b1e0](https://github.com/haskell-github-trust/effectful-data-cache/commit/650b1e07f9f08f50147a05761768ee9a2a5506be))
+
 ## [2.2.1](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.2.0...2.2.1) (2026-10-31)
 
 ## [2.2.0](https://github.com/haskell-github-trust/effectful-data-cache/compare/2.1.0...2.2.0) (2026-10-27)
