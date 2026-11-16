@@ -28,8 +28,8 @@ check-env:
 
 # Upload packages and docs as Hackage candidates
 candidate *pkgs=packages: check-env docs
-    for p in {{pkgs}}; do stack upload --candidate --test-tarball "$p" && stack upload --candidate --documentation "$p" || exit 1; done
+    for p in {{pkgs}}; do test "$p" = effectful-data-cache && p=.; stack upload --candidate --test-tarball "$p" && stack upload --candidate --documentation "$p" || exit 1; done
 
 # Publish packages and docs to Hackage
 release *pkgs=packages: check-env docs
-    for p in {{pkgs}}; do stack upload --test-tarball "$p" && stack upload --documentation "$p" || exit 1; done
+    for p in {{pkgs}}; do test "$p" = effectful-data-cache && p=.; stack upload --test-tarball "$p" && stack upload --documentation "$p" || exit 1; done
