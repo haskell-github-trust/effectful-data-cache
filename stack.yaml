@@ -1,5 +1,5 @@
 ---
-snapshot: lts-24.59
+snapshot: nightly-2026-11-15
 packages:
   - .
   - effectful-data-cache-opentelemetry
